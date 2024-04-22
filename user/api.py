@@ -4,6 +4,7 @@ from lib.sms import check_vcode
 from common import errors
 
 from user.models import User
+from user.forms import ProfileForm
 
 def get_verify_code(request):
     phonenum = request.GET.get('phonenum')
@@ -24,13 +25,22 @@ def login(request):
 
 
 def show_profile(request):
+    '''查看个人资料'''
     user = request.user
 
     return render_json(user.profile.to_dict())
 
 
 def modify_profile(request):
-    return render_json()
+    '''修改个人资料'''
+    form = ProfileForm(request.POST)
+    if form.is_valid():
+        profile = form.save(commit=False)
+        profile.id = request.user.id
+        profile.save()
+        return render_json(profile.to_dict())
+    else:
+        return render_json(form.errors, errors.PROFILE_ERROR)
 
 
 def upload_avatar(request):
