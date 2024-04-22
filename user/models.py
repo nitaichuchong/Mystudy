@@ -28,15 +28,21 @@ class User(models.Model, ModelMinxin):
         birth_time = datetime.date(self.birth_year, self.birth_month, self.birth_day)
         return (today - birth_time).days // 365
 
-    # def to_dict(self):
-    #     return {
-    #         'nickname': self.nickname,
-    #         'phonenum': self.phonenum,
-    #         'age':  self.age,
-    #         'sex': self.sex,
-    #         'avatar': self.avatar,
-    #         'location': self.location,
-    #     }
+    @property
+    def profile(self):
+        if not hasattr(self, '_profile'):
+            self._profile, _ = Profile.objects.get_or_create(id=self.id)
+        return self._profile
+
+    def to_dict(self):
+        return {
+            'nickname': self.nickname,
+            'phonenum': self.phonenum,
+            'age':  self.age,
+            'sex': self.sex,
+            'avatar': self.avatar,
+            'location': self.location,
+        }
 
 
 class Profile(models.Model, ModelMinxin):
