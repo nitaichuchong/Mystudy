@@ -2,8 +2,10 @@ import datetime
 
 from django.db import models
 
+from lib.orm import ModelMinxin
 
-class User(models.Model):
+
+class User(models.Model, ModelMinxin):
     SEX = (
        ('男性', '男性'),
        ('女性', '女性'),
@@ -26,18 +28,18 @@ class User(models.Model):
         birth_time = datetime.date(self.birth_year, self.birth_month, self.birth_day)
         return (today - birth_time).days // 365
 
-    def to_dict(self):
-        return {
-            'nickname': self.nickname,
-            'phonenum': self.phonenum,
-            'age':  self.age,
-            'sex': self.sex,
-            'avatar': self.avatar,
-            'location': self.location,
-        }
+    # def to_dict(self):
+    #     return {
+    #         'nickname': self.nickname,
+    #         'phonenum': self.phonenum,
+    #         'age':  self.age,
+    #         'sex': self.sex,
+    #         'avatar': self.avatar,
+    #         'location': self.location,
+    #     }
 
 
-class Profile(models.Model):
+class Profile(models.Model, ModelMinxin):
     SEX = (
         ('男性', '男性'),
         ('女性', '女性'),
@@ -56,3 +58,5 @@ class Profile(models.Model):
     vibration = models.BooleanField(default=True, verbose_name='是否开启震动')
     only_matche = models.BooleanField(default=True, verbose_name='不让未匹配的人看我相册')
     auto_play = models.BooleanField(default=True, verbose_name='是否自动播放视频')
+
+
