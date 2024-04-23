@@ -14,7 +14,7 @@ def get_verify_code(request):
 
 def login(request):
     phonenum = request.POST.get('phonenum')
-    vcode = request.POST.get('vcode')
+    vcode = int(request.POST.get('vcode'))
     if not check_vcode(phonenum, vcode):
         user, created = User.objects.get_or_create(phonenum=phonenum)
         request.session['uid'] = user.id
