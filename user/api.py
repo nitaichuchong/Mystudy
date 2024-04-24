@@ -5,6 +5,8 @@ from common import errors
 
 from user.models import User
 from user.forms import ProfileForm
+from user.logic import save_upload_file, upload_avatar_to_qiniu
+
 
 def get_verify_code(request):
     phonenum = request.GET.get('phonenum')
@@ -44,4 +46,8 @@ def modify_profile(request):
 
 
 def upload_avatar(request):
+    '''上传个人形象'''
+    avatar = request.FILES.get('avatar')
+    filepath, filename = save_upload_file(request.user, avatar)
+    upload_avatar_to_qiniu(request.user, filepath, filename)
     return render_json()
