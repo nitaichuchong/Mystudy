@@ -11,7 +11,7 @@ class LogicError(Exception):
     def __str__(self):
         return self.__class__.__name__
 
-def generate_logic_errro(name, code):
+def generate_logic_errro(name: str, code: int) -> LogicError:
     base_cls = (LogicError,)
     return type(name, base_cls, {'code': code})
 
