@@ -34,4 +34,5 @@ urlpatterns = [
     re_path(r'^api/social/dislike$', social_api.dislike),
     re_path(r'^api/social/rewind$', social_api.rewind),
     re_path(r'^api/social/liked_me$', social_api.show_liked_me),
+    re_path(r'^api/social/friends$', social_api.get_friends),
 ]

@@ -27,7 +27,7 @@ def superlike(request):
     '''超级喜欢'''
     sid = int(request.POST.get('sid'))
     is_matched = logic.superlike_someone(request.user, sid)
-    return render_json(None)
+    return render_json({'is_matched': is_matched})
 
 
 def dislike(request):
@@ -47,4 +47,9 @@ def show_liked_me(request):
     '''查看喜欢过我的人'''
     users = logic.users_liked_me(request.user)
     result = [u.to_dict() for u in users]
+    return render_json(result)
+
+
+def get_friends(request):
+    result = [frd.to_dict() for frd in request.user.friends()]
     return render_json(result)
