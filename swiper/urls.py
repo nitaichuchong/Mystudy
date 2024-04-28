@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from user import api as user_api
+from social import api as social_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,12 @@ urlpatterns = [
     re_path(r'^api/user/profile/show$', user_api.show_profile),
     re_path(r'^api/user/profile/modify$', user_api.modify_profile),
     re_path(r'^api/user/avatar/upload$', user_api.upload_avatar),
+
+    re_path(r'^api/social/rcmd_users$', social_api.get_rcmd_users),
+    re_path(r'^api/social/like$', social_api.like),
+    re_path(r'^api/social/superlike$', social_api.superlike),
+    re_path(r'^api/social/dislike$', social_api.dislike),
+    re_path(r'^api/social/rewind$', social_api.rewind),
+    re_path(r'^api/social/liked_me$', social_api.show_liked_me),
+    re_path(r'^api/social/friends$', social_api.get_friends),
 ]
