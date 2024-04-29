@@ -1,4 +1,4 @@
-class ModelMinxin:
+class ModelMixin:
     def to_dict(self, ignore_fields=()):
         '''将一个 model 转化成一个 dict'''
         attr_dict = {}
