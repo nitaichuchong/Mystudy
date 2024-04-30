@@ -19,6 +19,7 @@ from django.urls import path, re_path
 
 from user import api as user_api
 from social import api as social_api
+from vip import api as vip_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,4 +36,6 @@ urlpatterns = [
     re_path(r'^api/social/rewind$', social_api.rewind),
     re_path(r'^api/social/liked_me$', social_api.show_liked_me),
     re_path(r'^api/social/friends$', social_api.get_friends),
+
+    re_path(r'^api/vip/permissions$', vip_api.show_vip_permissions),
 ]
