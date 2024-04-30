@@ -4,6 +4,7 @@ from social.models import Swiped
 from vip.logic import need_perm
 
 
+
 def get_rcmd_users(request):
     '''获取推荐列表'''
     page = int(request.GET.get('page', 1))  # 页码
@@ -22,6 +23,7 @@ def like(request):
     sid = int(request.POST.get('sid'))
     is_matched = logic.like_someone(request.user, sid)
     return render_json({'is_matched': is_matched})
+
 
 
 @need_perm('superlike')

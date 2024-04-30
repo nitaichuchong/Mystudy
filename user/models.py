@@ -6,7 +6,6 @@ from lib.orm import ModelMixin
 from social.models import Friend
 from vip.models import Vip
 
-
 class User(models.Model, ModelMixin):
     SEX = (
        ('男性', '男性'),
